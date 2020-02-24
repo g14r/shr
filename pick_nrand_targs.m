@@ -15,7 +15,7 @@ function [x_coord, y_coord, dist, tgt_num] = pick_nrand_targs(n_targs, varargin)
 %
 % VARARGIN
 %     x_range:    spatial range of x coordinates [x_min x_max]
-%     y_range:    spatial range of x coordinates [y_min y_max]
+%     y_range:    spatial range of y coordinates [y_min y_max]
 %     min_d:      minimum distance between successive targets in percentage of largest range (default is 20%)
 %     max_d:      maximum distance between successive targets in percentage of largest range (default is 21%)
 %

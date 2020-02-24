@@ -15,7 +15,7 @@ function [x_coord, y_coord, dist, tgt_num] = pick_nrand_targs_grid(n_targs, vara
 %
 % VARARGIN
 %     x_range:    spatial range of x coordinates [x_min x_max]
-%     y_range:    spatial range of x coordinates [y_min y_max]
+%     y_range:    spatial range of y coordinates [y_min y_max]
 %     grid_size:  how many lines are defining the grid
 %
 % OUTPUTS
