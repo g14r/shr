@@ -1,5 +1,5 @@
 function [varargout] = shr_makeTargetFiles(s, b, varargin)
-%% function [varargout] = shr_makeTargetFiles(s, b, varargin)
+%
 %   This function creates .tgt and .dtp files for the Sequence Horizon
 %   Reaching behavioral experiment. In order to function properly, this
 %   function requires both the dataframe and the plotlib toolboxes.
