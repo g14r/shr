@@ -9,32 +9,32 @@ function [varargout] = shr_makeTargetFiles(s, b, varargin)
 % INPUTS
 %     s:            subject number (can be vector for multiple subjects)
 %     b:            block number (can be vector for multiple blocks)
-% 
+%
 % OPTIONAL VARARGINS
 %     n_trials:     defines how many trials per block are created
 %     seq_len:      sequence length (number of items / targets)
-%     seq_hor:      sequence horizon (how many targets ahead are visible)    
+%     seq_hor:      sequence horizon (how many targets ahead are visible)
 %     x_range:      spatial range of workspace x coordinates [x_min x_max]
 %     y_range:      spatial range of workspace y coordinates [y_min y_max]
-%     use_grid:     option of whether to use a grid of pre-determined target 
+%     use_grid:     option of whether to use a grid of pre-determined target
 %                   locations (1 = grid locations), or not (0 = random locations)
-%     grid_size:    (only matters if using grid) spcifies the resolution of the grid 
+%     grid_size:    (only matters if using grid) spcifies the resolution of the grid
 %                   (i.e. how many lines are splitting the workspace to create the grid)
-%     min_d:        (only matters if NOT using grid) minimum distance between successive 
+%     min_d:        (only matters if NOT using grid) minimum distance between successive
 %                   targets in percentage of largest coord range (default is 20%)
-%     max_d:        (only matters if NOT using grid) maximum distance between successive 
+%     max_d:        (only matters if NOT using grid) maximum distance between successive
 %                   targets in percentage of largest coord range (default is 21%)
-%     show_seq:     option to plot the sequence or targets for each trial of each block 
+%     show_seq:     option to plot the sequence or targets for each trial of each block
 %                   (use carefully! e.g., by limiting the number of trials and blocks)
-% 
+%
 % OUTPUTS
 %     G:            output struct for the whole group of subjects [subjects
-%                   x blocks x trials] 
+%                   x blocks x trials]
 %     .tgt files    (one per block per subject) specifying the order and
-%                   type of trials (spreadsheet type) 
+%                   type of trials (spreadsheet type)
 %     .dtp files    (one per block per subject) specifying information to
-%                   be read in by Kinarm Simulink 
-%     
+%                   be read in by Kinarm Simulink
+%
 % USAGE EXAMPLES
 %     [G] = shr_makeTargetFiles(99, 1, 'n_trials',1, 'use_grid',1, 'grid_size',11, 'seq_len',10, 'show_seq',1);
 %     [G] = shr_makeTargetFiles(99, 1, 'n_trials',1, 'use_grid',0, 'min_d',5, 'max_d',95, 'seq_len',10, 'show_seq',1);
@@ -107,14 +107,9 @@ for t = 1 : n_trials
     B.BN(t,1) = b; % block number
     B.SN(t,1) = s; % subject number
     % pick a sequence of targets with respective x,y coordinates
-    switch use_grid
-        case 0
-            % either randomly within the predefined range (some constraints apply)
-            [x_coord, y_coord, dist, tgt_num] = pick_nrand_targs(seq_len, 'x_range',x_range, 'y_range',y_range, 'min_d',min_d, 'max_d',max_d);
-        case 1
-            % or randomly but among a predefined grid of potential targets
-            [x_coord, y_coord, dist, tgt_num] = pick_nrand_targs_grid(seq_len, 'x_range',x_range, 'y_range',y_range, 'grid_size',grid_size);
-    end
+    % either randomly within the predefined range (some constraints apply): use_grid == 0
+    % or randomly but among a predefined grid ofpotential targets: use_grid == 1
+    [x_coord, y_coord, dist, tgt_num] = pick_nrand_targs(seq_len, 'x_range',x_range, 'y_range',y_range, 'use_grid',use_grid, 'grid_size',grid_size, 'min_d',min_d, 'max_d',max_d);
     B.seq_len(t,1) = seq_len; % which sequence length?
     B.seq_x(t,:) = x_coord; % what is the x coord of all targets in this sequence?
     B.seq_y(t,:) = y_coord; % what is the x coord of all targets in this sequence?
