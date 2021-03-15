@@ -65,9 +65,9 @@ function [varargout] = shr_target(s, b, varargin)
 % output: saved filename (fn), block structure (B)
 
 %% define target folder
-tgtDir = '/Users/gariani/Documents/robotcode/projects/SeqHorizonReach/tgt'; %save tgt files in the right folder
+tgtDir = '/Users/giacomo/Documents/robotcode/projects/SeqHorizonReach/tgt'; %save tgt files in the right folder
 if ~exist(tgtDir,'dir'); mkdir(tgtDir); end %create target folder if it doesn't already exist
-dtpDir = '/Users/gariani/Documents/robotcode/projects/SeqHorizonReach/dtp'; %save tgt files in the right folder
+dtpDir = '/Users/giacomo/Documents/robotcode/projects/SeqHorizonReach/dtp'; %save tgt files in the right folder
 if ~exist(dtpDir,'dir'); mkdir(dtpDir); end %create target folder if it doesn't already exist
 
 %% default experimental details and varargin options
@@ -160,7 +160,6 @@ function [dtp] = convert2dtp(mat)
 % Convert trial matrix to TP table
 mat_size = size(mat);
 tp_table = '[';
-newline = char(10);
 for row=1:mat_size(1)
     tp_table = [tp_table '['];
     for col=1:mat_size(2)
